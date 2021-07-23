@@ -3,6 +3,7 @@
 // This sample produces an enabled and a disabled ElevatedButton.
 
 import 'package:flutter/material.dart';
+import 'mqtt/mqtt_client.dart';
 
 void main() => runApp(const MyApp());
 
@@ -37,25 +38,32 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     final ButtonStyle buttonStyle =
-    ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
+        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
 
-    return Row(
-      children:[
-        Expanded(
-          child: Text(" "),
-          flex: 1,
-        ),
-        ElevatedButton(child: Text("Turn on"), onPressed: (){},),
-        Expanded(
-          child: Text(" "),
-          flex: 1,
-        ),
-        ElevatedButton(child: Text("Turn off"), onPressed: (){},),
-        Expanded(
-          child: Text(" "),
-          flex: 1,
-        ),
-      ]
-    );
+    return Row(children: [
+      Expanded(
+        child: Text(" "),
+        flex: 1,
+      ),
+      ElevatedButton(
+        child: Text("Turn on"),
+        onPressed: () {
+          debugPrint('button is pressed!');
+          mqttClientPofovu.publishMessage('hello fox!');
+        },
+      ),
+      Expanded(
+        child: Text(" "),
+        flex: 1,
+      ),
+      ElevatedButton(
+        child: Text("Turn off"),
+        onPressed: () {},
+      ),
+      Expanded(
+        child: Text(" "),
+        flex: 1,
+      ),
+    ]);
   }
 }
